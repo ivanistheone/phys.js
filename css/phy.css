@@ -1,0 +1,48 @@
+@font-face {
+    font-family: 'KBPlanetEarth';
+    src: url('KBPlanetEarth.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+body { 
+  background-color: whitesmoke;
+  margin:20px;
+  font-family:'KBPlanetEarth';
+}
+
+canvas { 
+  background-color: gainsboro;
+  width: 100%;
+}
+
+div.main {
+  max-width: 940px;
+  margin: 0 auto;
+}
+
+div.main h1 {
+  font-size: 60px;
+  margin: 45px 0;
+}
+
+div.main h2 {
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+div.main h3 {
+  margin-top: 15px;
+  margin-bottom: 5px;
+}
+
+div.main h4 {
+  margin-top: 8px;
+  margin-bottom: 5px;
+}
+
+
+div.row-fluid {
+  margin-bottom: 30px;
+}

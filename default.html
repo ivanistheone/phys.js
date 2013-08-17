@@ -12,6 +12,7 @@
 
     <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link rel="stylesheet" type="text/css" href="css/animations.css" />
+    <link rel="stylesheet" type="text/css" href="css/phy.css" />
 
 </head>
 <body>
@@ -21,8 +22,10 @@
                 <div class="container" style="width: auto;">
                     <a class="brand" href="#">Phys.js</a>
                     <ul class="nav">
-                        <li><a href="#formulas">Formulas</a></li>
-                        <li><a href="#demonstration">Demonstration</a></li>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#introduction">Introduction</a></li>
+                        <li><a href="#demonstration1">Demonstration</a></li>
+                        <li><a href="#demonstration2">Demonstration</a></li>
                         <li><a href="#theory">Theory</a></li>
                         <li><a href="#your-turn">Your Turn</a></li>
                     </ul>
@@ -30,18 +33,44 @@
             </div>
         </div>
         <div data-spy="scroll" data-target="#navbarExample" data-offset="0" id="scrollContent">
-            <h4 id="formulas">Formulas</h4>
+            <h1 id="home">Phys.js</h1>
+            <h2>Code for physics</h2>
+            <p>Get Started</p>
+            <img src="img/locationIcon.png" alt="direction_icon" height="10">
+            <h1 id="introduction">Introduction</h1>
+            <h2>What's in your textbook</h2>
+
             <p>
                 \begin{align*}
-                    a(t) &= a \\
-                    v(t) &= v_it
+                    x = position \\
+                    v = velocity
+                    a = acceleration
+                    t = time
                 \end{align*}
             </p>
 
-            <h4 id="demonstration">Demonstration</h4>
+            <p>But what does it all mean? </p>
+            <p>See here</p>
+            <img src="img/locationIcon.png" alt="direction_icon" height="10">
+
+            <h2 id="demonstration1">Demonstration 1</h2>
+            <p>To better teach you physics we're going to give you the controls of a spaceship</p>
             <div class='canvascontainer'>
-               
+               <p>Playing with the slider impacts the animation</p>
                <canvas id="demo1"></canvas>
+               <p>Next</p>
+               <img src="img/locationIcon.png" alt="direction_icon" height="10">
+            
+            </div>
+
+            <h2 id="demonstration2">Demonstration 2</h2>
+            <p>Let's start with showing you velocity.</p>
+            <p>Increasing the velocity means the spaceship will reach its destination faster.</p>
+            <div class='canvascontainer'>
+               <p>Reaching destination stops timer</p>
+               <canvas id="demo1"></canvas>
+               <p>Next</p>
+               <img src="img/locationIcon.png" alt="direction_icon" height="10">
             
             </div>
             
