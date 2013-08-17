@@ -171,6 +171,8 @@ if (this._start) {
 Anim.prototype.reset = function () {
     // horizontal moving blob with no gravity 
     this.obj = [];
+    this.dashboard.find(".time").text( 0 );
+    this._start = false;
     
     r1 = new Rect({ x:0, y:100, width:20, height:10 })
     //r1.v_x = Number( this.dashboard.find(".velocity").text() );    

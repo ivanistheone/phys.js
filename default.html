@@ -78,12 +78,31 @@
             
             </div>
 
+
+
+
             <h2 id="demonstration2">Demonstration 2</h2>
             <p>Let's start with showing you velocity.</p>
             <p>Increasing the velocity means the spaceship will reach its destination faster.</p>
+
+            <div class='canvascontainer'>
+               <canvas id="canvas2"></canvas>
+            </div>
+            <div id="dashboard2">
+                <div class="stats">
+                    <span class="animvalue time">0</span> <span class="units">s</span>
+                </div>
+                <div class="controls">                
+                    <button style="float:right" class="btn" id="reset2">Reset</button>
+                    <button style="float:right" class="btn" id="start2">Start</button>                
+                    Define the velocity: $v=$ <span style="font-weight:bold" class="velocity">50</span> <span class="units">px/sec</span> 
+                    <input type="text" data-slider="true" data-slider-theme="volume" data-slider-step="1" data-slider-range="50,400">     
+                </div>
+            </div>
+            
+
             <div class='canvascontainer'>
                <p>Reaching destination stops timer</p>
-               <canvas id="demo1"></canvas>
                <p>Next</p>
                <img src="img/locationIcon.png" alt="direction_icon" height="10">
             
@@ -103,6 +122,8 @@
 
             <h4 id="your-turn">Your Turn</h4>
 
+            <p>
+            
             <div class='canvascontainer'>
                <canvas id="canvas3"></canvas>
             </div>
@@ -145,45 +166,75 @@
 <!--slider-->
 <script src="js/simple-slider.js"></script>
 <script>
-    $("[data-slider]")
-      .each(function () {
-          var input = $(this);
-          $("<span>")
-            .addClass("output")
-            .insertAfter($(this));
-      })
-      .bind("slider:ready slider:changed", function (event, data) {
 
-          $("#dashboard3 .velocity").text(data.value.toFixed(0));
-
-          //$(this)
-          //  .nextAll(".output:first")
-          //    .html(data.value.toFixed(0));
-      });
-      
       
     $(function () {
         // initialization code
+        
+        var anim2, anim3;
+
+
+        $("#dashboard2 [data-slider]")
+          .each(function () {
+              var input = $(this);
+              $("<span>")
+                .addClass("output")
+                .insertAfter($(this));
+          })
+          .bind("slider:ready slider:changed", function (event, data) {
+    
+              $("#dashboard2 .velocity").text(data.value.toFixed(0));
+    
+              //$(this)
+              //  .nextAll(".output:first")
+              //    .html(data.value.toFixed(0));
+          });
+          
+          
+        // changing the velocity
+        anim2 = new Anim(document.getElementById('canvas2'), {height:200, width:800, dashboard:$("#dashboard2") })    
+        window.anim2 = anim2;        // save for posterity
+        anim2.reset();
+        anim2.render();
+
+        $("#start2").on("click", function() {
+            window.anim2.start_animation();
+        }); 
+        $("#reset2").on("click", function() {
+            window.anim2.reset();
+        }); 
+        
 
 
 
 
         // your turn
-        c = new Anim(document.getElementById('canvas3'), {height:200, width:800, dashboard:$("#dashboard3") })    
-        window.anim3 = c;        // save for posterity
-        c.reset();
-        c.render();
+        $("#dashboard3 [data-slider]")
+          .each(function () {
+              var input = $(this);
+              $("<span>")
+                .addClass("output")
+                .insertAfter($(this));
+          })
+          .bind("slider:ready slider:changed", function (event, data) {
+    
+              $("#dashboard3 .velocity").text(data.value.toFixed(0));
+    
+              //$(this)
+              //  .nextAll(".output:first")
+              //    .html(data.value.toFixed(0));
+          });
+    
+
         
-
-        $("#start2").on("click", function() {
-            window.anim2.start_animation();
-        }); 
-
-
+        anim3 = new Anim(document.getElementById('canvas3'), {height:200, width:800, dashboard:$("#dashboard3") })    
+        window.anim3 = anim3;        // save for posterity
+        anim3.reset();
+        anim3.render();
+                
         $("#start3").on("click", function() {
             window.anim3.start_animation();
         }); 
-
         $("#reset3").on("click", function() {
             window.anim3.reset();
         }); 
