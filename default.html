@@ -18,22 +18,27 @@
     <link href="css/simple-slider-volume.css" rel="stylesheet" type="text/css" />
     <link href="css/simple-slider-spaceship.css" rel="stylesheet" type="text/css" />
 
+    <link href="css/spaceship.css" rel="stylesheet" type="text/css" />
+
     <link rel="icon" href="favicon.ico" />
 
 </head>
 <body>
     <div class="container">
+    
+    
         <div id="navbarExample" class="navbar navbar-static">
             <div class="navbar-inner">
                 <div class="container" style="width: auto;">
                     <a class="brand" href="#">Phys.js</a>
                     <ul class="nav">
-                        <li><a href="#home">Home</a></li>
+                        <li><a href="#title">Home</a></li>
                         <li><a href="#introduction">Introduction</a></li>
                         <li><a href="#demonstration1">Demonstration</a></li>
                         <li><a href="#demonstration2">Demonstration</a></li>
                         <li><a href="#theory">Theory</a></li>
                         <li><a href="#your-turn">Your Turn</a></li>
+                        <li><a href="#team">Team</a></li>
                     </ul>
                 </div>
             </div>
@@ -43,44 +48,62 @@
         <div data-spy="scroll" data-target="#navbarExample" data-offset="0" id="scrollContent">
 
 
-            <h1 id="home">Phys.js</h1>
-            <h2>Code for physics</h2>
-            <p>Get Started</p>
-            <img src="img/locationIcon.png" alt="direction_icon" height="10">
+            <div class="containeritem">
+            <h1 id="title">Phys.js</h1>            
+            
+            <h2 id= "subtitle">Code for physics</h2>
+            <p >Get Started</p>
+
+
+            <img id="intro" src="img/locationIcon.png" alt="direction_icon" >
+            </div>
+
+
+            <div class="containeritem">
+
             <h1 id="introduction">Introduction</h1>
             <h2>What's in your textbook</h2>
 
             <p>
                 \begin{align*}
-                    x = position \\
-                    v = velocity
-                    a = acceleration
-                    t = time
+                    x &= position \\
+                    v &= velocity\\
+                    a &= acceleration\\
+                    t &= time
                 \end{align*}
             </p>
 
-            <p>But what does it all mean? </p>
-            <p>See here</p>
-            <img src="img/locationIcon.png" alt="direction_icon" height="10">
+            <p>But what does it all mean?</p>
+            
+            <img class="pagination" src="img/locationIcon.png" alt="direction_icon" >
+            <p class="pagination">See here</p>
+            </div>
 
+
+            <div class="containeritem">
             <h2 id="demonstration1">Demonstration 1</h2>
             <p>To better teach you physics we're going to give you the controls of a spaceship</p>
 
+            <div id="dashboard1">
 
-            <div class='canvascontainer'>
-               <p>Playing with the slider impacts the animation</p>
-               <canvas id="demo1"></canvas>
-               <p>Next</p>
-               <img src="img/locationIcon.png" alt="direction_icon" height="10">
+                <div id="space-area">
+                    <div id="spaceship"> 
+                        <img src="img/spaceship.png"/> 
+                    </div>
+                </div>
 
-                
-                <input type="text" data-slider="true" data-slider-theme="volume" data-slider-step="1" data-slider-range="50,400">
+                <input id="spaceshipSlider" style="width:800px; margin-left:200px;" type="text" data-slider="true" data-slider-theme="volume" data-slider-step="1" data-slider-range="50,400">
             
             </div>
 
 
+            <p class="pagination" >Next</p>
+            <img class="pagination" src="img/locationIcon.png" alt="direction_icon">
+            </div>
 
 
+
+            <div class="containeritem">
             <h2 id="demonstration2">Demonstration 2</h2>
             <p>Let's start with showing you velocity.</p>
             <p>Increasing the velocity means the spaceship will reach its destination faster.</p>
@@ -100,33 +123,66 @@
                 </div>
             </div>
             
-
-            <div class='canvascontainer'>
-               <p>Reaching destination stops timer</p>
-               <p>Next</p>
-               <img src="img/locationIcon.png" alt="direction_icon" height="10">
-            
+            <p class="pagination" >Next</p>
+            <img class="pagination" src="img/locationIcon.png" alt="direction_icon">
 
             </div>
 
 
-
-
-
-
+            <div class="containeritem">
             <h4 id="theory">Theory</h4>
-            <p>Occaecat commodo aliqua delectus. Fap craft velit ea sunt next level locavore single-origin in1.com in magna veniam. High life id vinyl, echo park consequat quis aliquip banh mi pitchfork. Vero VHS est adipisicing. Consectetur nisi DIY minim messenger bag. Cred ex in, sustainable delectus consectetur fanny pack iphone.</p>
+            <p>Since we're learning physics here, we're going to have to see some math.</p>
+            <p>Earlier, we had a distance $d$, a velocity $v$, and a time $t$. But how do they all relate?</p>
+             \begin{align*}
+                    t = \frac{ \Delta x }{ v }  \\
+                    v = \frac{ \Delta x }{ t } \\
+                    \Delta x = v t \\
+                \end{align*}
+                <p class="pagination">Try it!</p>
+            <img class="pagination" src="img/locationIcon.png" alt="direction_icon">
+            </div>
 
 
-
-
+            <div class="containeritem">
             <h4 id="your-turn">Your Turn</h4>
+            <p>Your spaceship has to reach its destination in ? seconds</p>
 
-            <p>
+
+            <div id="calculator">
+                <!-- Screen and clear key -->
+                <div class="top">
+                  <span class="clear">C</span>
+                  <div class="screen"></div>
+                </div>
+                
+                <div class="keys">
+                  <!-- operators and other keys -->
+                  <span>7</span>
+                  <span>8</span>
+                  <span>9</span>
+                  <span class="operator">+</span>
+                  <span>4</span>
+                  <span>5</span>
+                  <span>6</span>
+                  <span class="operator">-</span>
+                  <span>1</span>
+                  <span>2</span>
+                  <span>3</span>
+                  <span class="operator">/</span>
+                  <span>0</span>
+                  <span>.</span>
+                  <span class="eval">=</span>
+                  <span class="operator">x</span>
+                </div>
+            </div>
+
+
+
             
             <div class='canvascontainer'>
                <canvas id="canvas3"></canvas>
             </div>
+
 
             <div id="dashboard3">
                 <div class="stats">
@@ -138,18 +194,38 @@
                     Define the velocity: $v=$ <span style="font-weight:bold" class="velocity">50</span> <span class="units">px/sec</span> 
                     <input type="text" data-slider="true" data-slider-theme="volume" data-slider-step="1" data-slider-range="50,400">     
                 </div>
-            </div>
-            
+           </div>
+          
+          
+          </div>
 
 
+          <div class='containteritem' style="height:100px">            
+            &nbsp;
+          </div>
+
+          <div class='containteritem'>            
+          <h4 id="team">team</h4>
+           <img src="img/team.jpg"/>
+          </div>
+           
+           
+           
         </div>
     </div>
 
 </body>
 
+<!-- PrefixFree -->
+<script src="http://thecodeplayer.com/uploads/js/prefixfree-1.0.7.js" type="text/javascript"></script>
+
+<!--jQuery-->
+<!--<script src="http://code.jquery.com/jquery.js"></script>-->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 
 <!--PHYS.JS-->
 <script src="js/animations.js"></script>
+<script src="js/spaceship.js"></script>
 
 <!--Formulas-->
 <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
@@ -159,14 +235,103 @@
 
 <script src="js/bootstrap.min.js"></script>
 
-<!--jQuery-->
-<!--<script src="http://code.jquery.com/jquery.js"></script>-->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+
 
 <!--slider-->
 <script src="js/simple-slider.js"></script>
 <script>
 
+
+
+
+
+// Get all the keys from document
+var keys = document.querySelectorAll('#calculator span');
+var operators = ['+', '-', 'x', '÷'];
+var decimalAdded = false;
+
+// Add onclick event to all the keys and perform operations
+for(var i = 0; i < keys.length; i++) {
+  keys[i].onclick = function(e) {
+    // Get the input and button values
+    var input = document.querySelector('.screen');
+    var inputVal = input.innerHTML;
+    var btnVal = this.innerHTML;
+    
+    // Now, just append the key values (btnValue) to the input string and finally use javascript's eval function to get the result
+    // If clear key is pressed, erase everything
+    if(btnVal == 'C') {
+      input.innerHTML = '';
+      decimalAdded = false;
+    }
+    
+    // If eval key is pressed, calculate and display the result
+    else if(btnVal == '=') {
+      var equation = inputVal;
+      var lastChar = equation[equation.length - 1];
+      
+      // Replace all instances of x and ÷ with * and / respectively. This can be done easily using regex and the 'g' tag which will replace all instances of the matched character/substring
+      equation = equation.replace(/x/g, '*').replace(/÷/g, '/');
+      
+      // Final thing left to do is checking the last character of the equation. If it's an operator or a decimal, remove it
+      if(operators.indexOf(lastChar) > -1 || lastChar == '.')
+        equation = equation.replace(/.$/, '');
+      
+      if(equation)
+        input.innerHTML = eval(equation);
+        
+      decimalAdded = false;
+    }
+    
+    // Basic functionality of the calculator is complete. But there are some problems like 
+    // 1. No two operators should be added consecutively.
+    // 2. The equation shouldn't start from an operator except minus
+    // 3. not more than 1 decimal should be there in a number
+    
+    // We'll fix these issues using some simple checks
+    
+    // indexOf works only in IE9+
+    else if(operators.indexOf(btnVal) > -1) {
+      // Operator is clicked
+      // Get the last character from the equation
+      var lastChar = inputVal[inputVal.length - 1];
+      
+      // Only add operator if input is not empty and there is no operator at the last
+      if(inputVal != '' && operators.indexOf(lastChar) == -1) 
+        input.innerHTML += btnVal;
+      
+      // Allow minus if the string is empty
+      else if(inputVal == '' && btnVal == '-') 
+        input.innerHTML += btnVal;
+      
+      // Replace the last operator (if exists) with the newly pressed operator
+      if(operators.indexOf(lastChar) > -1 && inputVal.length > 1) {
+        // Here, '.' matches any character while $ denotes the end of string, so anything (will be an operator in this case) at the end of string will get replaced by new operator
+        input.innerHTML = inputVal.replace(/.$/, btnVal);
+      }
+      
+      decimalAdded =false;
+    }
+    
+    // Now only the decimal problem is left. We can solve it easily using a flag 'decimalAdded' which we'll set once the decimal is added and prevent more decimals to be added once it's set. It will be reset when an operator, eval or clear key is pressed.
+    else if(btnVal == '.') {
+      if(!decimalAdded) {
+        input.innerHTML += btnVal;
+        decimalAdded = true;
+      }
+    }
+    
+    // if any other key is pressed, just append it
+    else {
+      input.innerHTML += btnVal;
+    }
+    
+    // prevent page jumps
+    e.preventDefault();
+  } 
+}
+
+      
       
     $(function () {
         // initialization code
@@ -242,6 +407,8 @@
         
         
     });
+
+
 </script>
 
 
