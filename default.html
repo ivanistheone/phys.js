@@ -2,7 +2,7 @@
 
 <html>
 <head>
-    <title>MathJax TeX Test Page</title>
+    <title>Phys.js</title>
     <script type="text/x-mathjax-config">
         MathJax.Hub.Config(
             {tex2jax:
@@ -11,7 +11,12 @@
     </script>
 
     <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
-    <link rel="stylesheet" type="text/css" href="css/animations.css" />
+    <link href="css/animations.css" rel="stylesheet" type="text/css" />
+
+    <link href="css/simple-slider.css" rel="stylesheet" type="text/css" />
+    <link href="css/simple-slider-volume.css" rel="stylesheet" type="text/css" />
+
+    <link rel="icon" href="favicon.ico" />
 
 </head>
 <body>
@@ -41,28 +46,66 @@
             <h4 id="demonstration">Demonstration</h4>
             <div class='canvascontainer'>
                
-               <canvas id="demo1" style=""></canvas>
-            
+                <canvas id="demo1"></canvas>
+
             </div>
-            
-            
+
+
 
             <h4 id="theory">Theory</h4>
             <p>Occaecat commodo aliqua delectus. Fap craft velit ea sunt next level locavore single-origin in1.com in magna veniam. High life id vinyl, echo park consequat quis aliquip banh mi pitchfork. Vero VHS est adipisicing. Consectetur nisi DIY minim messenger bag. Cred ex in, sustainable delectus consectetur fanny pack iphone.</p>
+
+
             <h4 id="your-turn">Your Turn</h4>
-            <p>In incididunt echo park, officia deserunt mcsweeney's proident master in1dotcom thundercats sapiente veniam. Excepteur. Locavore enim nostrud mlkshk brooklyn nesciunt.</p>
+
+            <div class="dashboard">
+
+                <div style="margin-bottom:5px">Define the velocity: <span style="font-weight:bold" id="velocity">50</span></div>
+                <input type="text" data-slider="true" data-slider-theme="volume" data-slider-step="1" data-slider-range="50,400">
+            </div>
+
 
         </div>
     </div>
 
 </body>
 
-<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<script src='http://nornagon.github.com/scrubby/scrubby.all.js'></script>
+
+<!--PHYS.JS-->
 <script src="js/animations.js"></script>
 
-<script src="http://code.jquery.com/jquery.js"></script>
+<!--Formulas-->
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<!--NiceBall-->
+<!--<script src='http://nornagon.github.com/scrubby/scrubby.all.js'></script>-->
+
 <script src="js/bootstrap.min.js"></script>
+
+<!--jQuery-->
+<!--<script src="http://code.jquery.com/jquery.js"></script>-->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+
+<!--slider-->
+<script src="js/simple-slider.js"></script>
+<script>
+    $("[data-slider]")
+      .each(function () {
+          var input = $(this);
+          $("<span>")
+            .addClass("output")
+            .insertAfter($(this));
+      })
+      .bind("slider:ready slider:changed", function (event, data) {
+
+          $("#velocity").text(data.value.toFixed(0));
+
+          //$(this)
+          //  .nextAll(".output:first")
+          //    .html(data.value.toFixed(0));
+      });
+</script>
+
 
 
 </html>
