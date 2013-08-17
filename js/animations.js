@@ -1,6 +1,6 @@
 
 
-var TARGET_POS = 700;
+var TARGET_POS = 600;
 
 function Rect(options) {
 
@@ -47,8 +47,15 @@ if (this.y > maxHeight) this.y = 0;
 
 
 Rect.prototype.render = function (context) {
+
+if (this.img){
+context.drawImage(this.img,this.x,this.y-50,120,100);
+} else {
 context.fillStyle = this.fill
 context.fillRect(this.x, this.y, this.width, this.height)
+}
+
+
 }
 
 
@@ -177,6 +184,10 @@ Anim.prototype.reset = function () {
     r1 = new Rect({ x:0, y:100, width:20, height:10 })
     //r1.v_x = Number( this.dashboard.find(".velocity").text() );    
     r1.fill = 'rgba(255, 0, 0, 1)'
+    
+    r1.img = new Image();
+    r1.img.src = "img/spaceship.png";
+
     this.obj.push(r1);
     
     // draw target
@@ -190,7 +201,7 @@ Anim.prototype.reset = function () {
 
 Anim.prototype.isCollision = function () {
     var rocket = this.obj[0];
-    if (rocket.x + rocket.width >= TARGET_POS) {
+    if (rocket.x + 120 >= TARGET_POS) {
         return true;
     } else {
         return false;

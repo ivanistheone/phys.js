@@ -59,17 +59,17 @@
             </div>
 
 
-            <div class="containeritem">
+            <div class="containeritem" style="height:310px;">
 
             <h1 id="introduction">Introduction</h1>
             <h2>What's in your textbook</h2>
 
             <p>
                 \begin{align*}
-                    x &= position \\
-                    v &= velocity\\
-                    a &= acceleration\\
-                    t &= time
+                    t &= \textrm{ time} \\                
+                    x(t) &= x_i + v_i + \frac{1}{2}at^2 \\
+                    v(t) &= v_i + at\\
+                    a(t) &= a
                 \end{align*}
             </p>
 
@@ -80,7 +80,7 @@
             </div>
 
 
-            <div class="containeritem">
+            <div class="containeritem" style="height:310px;">
             <h2 id="demonstration1">Demonstration 1</h2>
             <p>To better teach you physics we're going to give you the controls of a spaceship</p>
 
@@ -357,7 +357,7 @@ for(var i = 0; i < keys.length; i++) {
           
           
         // changing the velocity
-        anim2 = new Anim(document.getElementById('canvas2'), {height:200, width:800, dashboard:$("#dashboard2") })    
+        anim2 = new Anim(document.getElementById('canvas2'), {height:200, width:700, dashboard:$("#dashboard2") })    
         window.anim2 = anim2;        // save for posterity
         anim2.reset();
         anim2.render();
@@ -392,7 +392,7 @@ for(var i = 0; i < keys.length; i++) {
     
 
         
-        anim3 = new Anim(document.getElementById('canvas3'), {height:200, width:800, dashboard:$("#dashboard3") })    
+        anim3 = new Anim(document.getElementById('canvas3'), {height:200, width:700, dashboard:$("#dashboard3") })    
         window.anim3 = anim3;        // save for posterity
         anim3.reset();
         anim3.render();

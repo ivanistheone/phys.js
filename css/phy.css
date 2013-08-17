@@ -35,7 +35,7 @@ div.container {
 }
 
 div.containeritem {
-  width:800px;
+  width:950px;
   height:600px;
   margin-bottom:80px;
 }
@@ -108,10 +108,11 @@ html {
 
 /* Using box shadows to create 3D effects */
 #calculator {
+  float: right;
   width: 150px;
   height: auto;
   
-  margin: 100px auto;
+  margin: 10px auto;
   padding: 20px 20px 9px;
   
   background: #9dd2ea;
