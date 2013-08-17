@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html>
 <head>
     <title>MathJax TeX Test Page</title>
@@ -9,24 +10,53 @@
                     inlineMath: [['$','$'], ['\\(','\\)']]}});
     </script>
 
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link rel="stylesheet" type="text/css" href="css/animations.css" />
+
 </head>
 <body>
+    <div class="container">
+        <div id="navbarExample" class="navbar navbar-static">
+            <div class="navbar-inner">
+                <div class="container" style="width: auto;">
+                    <a class="brand" href="#">Phys.js</a>
+                    <ul class="nav">
+                        <li><a href="#formulas">Formulas</a></li>
+                        <li><a href="#demonstration">Demonstration</a></li>
+                        <li><a href="#theory">Theory</a></li>
+                        <li><a href="#your-turn">Your Turn</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div data-spy="scroll" data-target="#navbarExample" data-offset="0" id="scrollContent">
+            <h4 id="formulas">Formulas</h4>
+            <p>
+                \begin{align*}
+                    a(t) &= a \\
+                    v(t) &= v_it
+                \end{align*}
+            </p>
 
-    <h2>This is our INTRO</h2>
+            <h4 id="demonstration">Demonstration</h4>
+            <div class='ball'></div>
 
-    <div>
+            <h4 id="theory">Theory</h4>
+            <p>Occaecat commodo aliqua delectus. Fap craft velit ea sunt next level locavore single-origin in1.com in magna veniam. High life id vinyl, echo park consequat quis aliquip banh mi pitchfork. Vero VHS est adipisicing. Consectetur nisi DIY minim messenger bag. Cred ex in, sustainable delectus consectetur fanny pack iphone.</p>
+            <h4 id="your-turn">Your Turn</h4>
+            <p>In incididunt echo park, officia deserunt mcsweeney's proident master in1dotcom thundercats sapiente veniam. Excepteur. Locavore enim nostrud mlkshk brooklyn nesciunt.</p>
 
-\begin{align*}
-    a(t) &= a \\
-    v(t) &= v_it
-\end{align*} 
-
+        </div>
     </div>
 
 </body>
 
-    <script type="text/javascript"
-        src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-    </script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script src='http://nornagon.github.com/scrubby/scrubby.all.js'></script>
+<script src="js/animations.js"></script>
+
+<script src="http://code.jquery.com/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
+
 
 </html>
