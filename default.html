@@ -38,7 +38,11 @@
                 </div>
             </div>
         </div>
+        
+        
         <div data-spy="scroll" data-target="#navbarExample" data-offset="0" id="scrollContent">
+
+
             <h1 id="home">Phys.js</h1>
             <h2>Code for physics</h2>
             <p>Get Started</p>
@@ -61,6 +65,8 @@
 
             <h2 id="demonstration1">Demonstration 1</h2>
             <p>To better teach you physics we're going to give you the controls of a spaceship</p>
+
+
             <div class='canvascontainer'>
                <p>Playing with the slider impacts the animation</p>
                <canvas id="demo1"></canvas>
@@ -86,17 +92,33 @@
 
 
 
+
+
+
             <h4 id="theory">Theory</h4>
             <p>Occaecat commodo aliqua delectus. Fap craft velit ea sunt next level locavore single-origin in1.com in magna veniam. High life id vinyl, echo park consequat quis aliquip banh mi pitchfork. Vero VHS est adipisicing. Consectetur nisi DIY minim messenger bag. Cred ex in, sustainable delectus consectetur fanny pack iphone.</p>
 
 
+
+
             <h4 id="your-turn">Your Turn</h4>
 
-            <div class="dashboard">
-
-                <div style="margin-bottom:5px">Define the velocity: <span style="font-weight:bold" id="velocity">50</span></div>
-                <input type="text" data-slider="true" data-slider-theme="volume" data-slider-step="1" data-slider-range="50,400">
+            <div class='canvascontainer'>
+               <canvas id="canvas3"></canvas>
             </div>
+
+            <div id="dashboard3">
+                <div class="stats">
+                    <span class="animvalue time">0</span> <span class="units">s</span>
+                </div>
+                <div class="controls">                
+                    <button style="float:right" class="btn" id="reset3">Reset</button>
+                    <button style="float:right" class="btn" id="start3">Start</button>                
+                    Define the velocity: $v=$ <span style="font-weight:bold" class="velocity">50</span> <span class="units">px/sec</span> 
+                    <input type="text" data-slider="true" data-slider-theme="volume" data-slider-step="1" data-slider-range="50,400">     
+                </div>
+            </div>
+            
 
 
         </div>
@@ -132,12 +154,43 @@
       })
       .bind("slider:ready slider:changed", function (event, data) {
 
-          $("#velocity").text(data.value.toFixed(0));
+          $("#dashboard3 .velocity").text(data.value.toFixed(0));
 
           //$(this)
           //  .nextAll(".output:first")
           //    .html(data.value.toFixed(0));
       });
+      
+      
+    $(function () {
+        // initialization code
+
+
+
+
+        // your turn
+        c = new Anim(document.getElementById('canvas3'), {height:200, width:800, dashboard:$("#dashboard3") })    
+        window.anim3 = c;        // save for posterity
+        c.reset();
+        c.render();
+        
+
+        $("#start2").on("click", function() {
+            window.anim2.start_animation();
+        }); 
+
+
+        $("#start3").on("click", function() {
+            window.anim3.start_animation();
+        }); 
+
+        $("#reset3").on("click", function() {
+            window.anim3.reset();
+        }); 
+
+        
+        
+    });
 </script>
 
 
