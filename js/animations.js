@@ -1,6 +1,8 @@
 
 
 
+var TARGET_POS = 700;
+
 ;(function () {
 
   function Rect(options) {
@@ -61,9 +63,10 @@
   
   
 
-  function Anim(canvas, but) {
+  function Anim(canvas, options) {
     this.canvas = canvas
-    this.canvas.height = this.canvas.width
+    this.canvas.height = options.height || this.canvas.height;
+    this.canvas.width  = options.width || this.canvas.width;
     this.context = canvas.getContext('2d')
     this.obj = []
     this._start = false
@@ -71,17 +74,32 @@
 
     this.canvas.addEventListener('click', (function (e) {
       e.preventDefault()
-      this._start = !this._start
-      this.start()
+      this.start_animaltion();
     }).bind(this))
   }
 
+
+  Anim.prototype.start_animation = function () {
+    this._start = !this._start;
+    this.start();
+  }
+  
+  
 
   Anim.prototype.move = function () {
     this.obj.forEach((function (o) {
       o.move(this.canvas.width, this.canvas.height)
     }).bind(this))    
+    
+    
+    // check for collisions
+    if (this.isCollision()){
+        this._start = false;
+        console.log("collided!!");
+    }
+    
   }
+
 
   Anim.prototype.draw_xy_axes = function () {
     var ctx = this.context,
@@ -90,25 +108,28 @@
 
     // x - axis
     ctx.beginPath();
-    ctx.moveTo(0,0);
-    ctx.lineTo(this.canvas.width,0);
-    ctx.lineTo(this.canvas.width-arr_size,arr_size);
-    ctx.lineTo(this.canvas.width,0);
-    ctx.lineTo(this.canvas.width-arr_size,-arr_size);    
+    var xaxis_pos = this.canvas.height-10;
+    ctx.moveTo(0,xaxis_pos);
+    ctx.lineTo(this.canvas.width,xaxis_pos);
+    ctx.lineTo(this.canvas.width-arr_size,xaxis_pos+ 0.5*arr_size);
+    ctx.lineTo(this.canvas.width,xaxis_pos);    
+    ctx.lineTo(this.canvas.width-arr_size,xaxis_pos- 0.5*arr_size);
+    //ctx.lineTo(this.canvas.width,xaxis_pos);
+    //ctx.lineTo(this.canvas.width-arr_size,-arr_size);    
     ctx.stroke();    
     ctx.font = 'Italic 9px Sans-Serif';
-    ctx.strokeText("x", this.canvas.width - arr_size - 8, 9);  
+    ctx.strokeText("x", this.canvas.width - arr_size - 8, xaxis_pos+ 9);  
 
     // y - axis
     ctx.beginPath();
     ctx.moveTo(0,0);
     ctx.lineTo(0,this.canvas.height);
-    ctx.lineTo(arr_size, this.canvas.height-arr_size);
-    ctx.lineTo(0, this.canvas.height);
-    ctx.lineTo(-arr_size, this.canvas.height-arr_size);    
+//    ctx.lineTo(arr_size, this.canvas.height-arr_size);
+//    ctx.lineTo(0, this.canvas.height);
+//    ctx.lineTo(-arr_size, this.canvas.height-arr_size);    
     ctx.stroke();    
     ctx.font = 'Italic 9px Sans-Serif';
-    ctx.strokeText("y", 3, this.canvas.height - arr_size - 3);  
+//    ctx.strokeText("y", 3, this.canvas.height - arr_size - 3);  
     
   }
 
@@ -125,20 +146,49 @@
   // main loop
   Anim.prototype.start = function () {
     if (this._start) { 
-        console.log("a" + this._start);
+        // if animation is running...
         requestAnimationFrame((function () {
                 this.start()
         }).bind(this))
         this.move()
         this.render()
-    } else {
+    } else { // don't do anything
         return;    
     }
   }
 
 
+  // initialize/reset animation 
+  Anim.prototype.reset = function () {
+    // horizontal moving blob with no gravity 
+    
+    this.obj = [];
+    
+    r1 = new Rect({ x:0, y:100, width:20, height:10 })
+    r1.v_x = 300;    
+    r1.fill = 'rgba(255, 0, 0, 1)'
+    this.obj.push(r1);
+    
+    
+    // draw target
+    r2 = new Rect({ x:TARGET_POS, y:50, width:5, height:100 })
+    this.obj.push(r2);    
+    
+    this.render();
+    
+  }
+  
 
-
+  Anim.prototype.isCollision = function () {
+    var rocket = this.obj[0];
+    
+    if (rocket.x + rocket.width >= TARGET_POS) {
+        return true;
+    } else {
+        return false;
+    }
+    
+  }
 
 
 
@@ -147,14 +197,11 @@
   ;(function init() {
     var r1,r2,r3,r4;
 
-    c = new Anim(document.getElementById('demo1'))
+    c = new Anim(document.getElementById('demo1'), {height:200, width:800})
     
+    window.anim = c;        // save for posterity
 
-    // horizontal moving blob with no gravity 
-    r1 = new Rect({ x:0, y:0 })
-    r1.v_x = 110;    
-    r1.fill = 'rgba(255, 0, 0, 1)'
-    c.obj.push(r1);
+    c.reset();
     
     
     c.render()
