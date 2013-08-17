@@ -16,6 +16,9 @@
 
     <link href="css/simple-slider.css" rel="stylesheet" type="text/css" />
     <link href="css/simple-slider-volume.css" rel="stylesheet" type="text/css" />
+    <link href="css/simple-slider-spaceship.css" rel="stylesheet" type="text/css" />
+
+    <link href="css/spaceship.css" rel="stylesheet" type="text/css" />
 
     <link rel="icon" href="favicon.ico" />
 
@@ -27,7 +30,7 @@
                 <div class="container" style="width: auto;">
                     <a class="brand" href="#">Phys.js</a>
                     <ul class="nav">
-                        <li><a href="#home">Home</a></li>
+                        <li><a href="#title">Home</a></li>
                         <li><a href="#introduction">Introduction</a></li>
                         <li><a href="#demonstration1">Demonstration</a></li>
                         <li><a href="#demonstration2">Demonstration</a></li>
@@ -37,8 +40,11 @@
                 </div>
             </div>
         </div>
+        
+        
         <div data-spy="scroll" data-target="#navbarExample" data-offset="0" id="scrollContent">
-            
+
+
             <div class="containeritem">
             <h1 id="title">Phys.js</h1>            
             
@@ -49,7 +55,9 @@
             <img id="intro" src="img/locationIcon.png" alt="direction_icon" >
             </div>
 
+
             <div class="containeritem">
+
             <h1 id="introduction">Introduction</h1>
             <h2>What's in your textbook</h2>
 
@@ -61,20 +69,37 @@
                     t &= time
                 \end{align*}
             </p>
+
             <p>But what does it all mean?</p>
             
             <img class="pagination" src="img/locationIcon.png" alt="direction_icon" >
             <p class="pagination">See here</p>
             </div>
+
+
             <div class="containeritem">
             <h2 id="demonstration1">Demonstration 1</h2>
             <p>To better teach you physics we're going to give you the controls of a spaceship</p>
-            <div class='canvascontainer'>
-               <canvas id="demo1"></canvas>
+
+            <div id="dashboard1">
+
+                <div id="space-area">
+                    <div id="spaceship"> 
+                        <img src="img/spaceship.png"/> 
+                    </div>
+                </div>
+
+                <input id="spaceshipSlider" style="width:800px; margin-left:200px;" type="text" data-slider="true" data-slider-theme="volume" data-slider-step="1" data-slider-range="50,400">
+            
             </div>
+
+
             <p class="pagination" >Next</p>
             <img class="pagination" src="img/locationIcon.png" alt="direction_icon">
             </div>
+
+
+
             <div class="containeritem">
             <h2 id="demonstration2">Demonstration 2</h2>
             <p>Let's start with showing you velocity.</p>
@@ -87,9 +112,9 @@
             </div>
             <p class="pagination">Next</p>
             <img class="pagination" src="img/locationIcon.png" alt="direction_icon" >
-
-
             </div>
+
+
             <div class="containeritem">
             <h4 id="theory">Theory</h4>
             <p>Since we're learning physics here, we're going to have to see some math.</p>
@@ -102,6 +127,7 @@
                 <p class="pagination">Try it!</p>
             <img class="pagination" src="img/locationIcon.png" alt="direction_icon">
             </div>
+
 
             <div class="containeritem">
             <h4 id="your-turn">Your Turn</h4>
@@ -136,10 +162,20 @@
 
 
 
-            <div class="dashboard">
+            <div class='canvascontainer'>
+               <canvas id="canvas3"></canvas>
+            </div>
 
-                <div style="margin-bottom:5px">Define the velocity: <span style="font-weight:bold" id="velocity">50</span></div>
-                <input type="text" data-slider="true" data-slider-theme="volume" data-slider-step="1" data-slider-range="50,400">
+            <div id="dashboard3">
+                <div class="stats">
+                    <span class="animvalue time">0</span> <span class="units">s</span>
+                </div>
+                <div class="controls">                
+                    <button style="float:right" class="btn" id="reset3">Reset</button>
+                    <button style="float:right" class="btn" id="start3">Start</button>                
+                    Define the velocity: $v=$ <span style="font-weight:bold" class="velocity">50</span> <span class="units">px/sec</span> 
+                    <input type="text" data-slider="true" data-slider-theme="volume" data-slider-step="1" data-slider-range="50,400">     
+                </div>
             </div>
           </div>
 
@@ -151,8 +187,14 @@
 
 <!-- PrefixFree -->
 <script src="http://thecodeplayer.com/uploads/js/prefixfree-1.0.7.js" type="text/javascript" type="text/javascript"></script>
+
+<!--jQuery-->
+<!--<script src="http://code.jquery.com/jquery.js"></script>-->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+
 <!--PHYS.JS-->
 <script src="js/animations.js"></script>
+<script src="js/spaceship.js"></script>
 
 <!--Formulas-->
 <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
@@ -162,9 +204,7 @@
 
 <script src="js/bootstrap.min.js"></script>
 
-<!--jQuery-->
-<!--<script src="http://code.jquery.com/jquery.js"></script>-->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+
 
 <!--slider-->
 <script src="js/simple-slider.js"></script>
@@ -178,12 +218,16 @@
       })
       .bind("slider:ready slider:changed", function (event, data) {
 
-          $("#velocity").text(data.value.toFixed(0));
+          $("#dashboard3 .velocity").text(data.value.toFixed(0));
 
           //$(this)
           //  .nextAll(".output:first")
           //    .html(data.value.toFixed(0));
       });
+
+
+
+
 
 // Get all the keys from document
 var keys = document.querySelectorAll('#calculator span');
@@ -270,6 +314,39 @@ for(var i = 0; i < keys.length; i++) {
     e.preventDefault();
   } 
 }
+
+      
+      
+    $(function () {
+        // initialization code
+
+
+
+
+        // your turn
+        c = new Anim(document.getElementById('canvas3'), {height:200, width:800, dashboard:$("#dashboard3") })    
+        window.anim3 = c;        // save for posterity
+        c.reset();
+        c.render();
+        
+
+        $("#start2").on("click", function() {
+            window.anim2.start_animation();
+        }); 
+
+
+        $("#start3").on("click", function() {
+            window.anim3.start_animation();
+        }); 
+
+        $("#reset3").on("click", function() {
+            window.anim3.reset();
+        }); 
+
+        
+        
+    });
+
 
 </script>
 
