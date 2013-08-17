@@ -18,6 +18,8 @@
     <link href="css/simple-slider-volume.css" rel="stylesheet" type="text/css" />
     <link href="css/simple-slider-spaceship.css" rel="stylesheet" type="text/css" />
 
+    <link href="css/spaceship.css" rel="stylesheet" type="text/css" />
+
     <link rel="icon" href="favicon.ico" />
 
 </head>
@@ -63,20 +65,33 @@
             <p>See here</p>
             <img src="img/locationIcon.png" alt="direction_icon" height="10">
 
+            
             <h2 id="demonstration1">Demonstration 1</h2>
             <p>To better teach you physics we're going to give you the controls of a spaceship</p>
 
+            <div id="dashboard1">
 
-            <div class='canvascontainer'>
+                <div id="space-area">
+                    <div id="spaceship"> 
+                        <img src="img/spaceship.png"/> 
+                    </div>
+                </div>
+
+                <input id="spaceshipSlider" style="width:800px; margin-left:200px;" type="text" data-slider="true" data-slider-theme="volume" data-slider-step="1" data-slider-range="50,400">
+            
+            </div>
+
+            
+
+           <!-- <div class='canvascontainer'>
                <p>Playing with the slider impacts the animation</p>
                <canvas id="demo1"></canvas>
                <p>Next</p>
                <img src="img/locationIcon.png" alt="direction_icon" height="10">
-
                 
-                <input type="text" data-slider="true" data-slider-theme="spaceship" data-slider-step="1" data-slider-range="50,400">
+                
             
-            </div>
+            </div>-->
 
             <h2 id="demonstration2">Demonstration 2</h2>
             <p>Let's start with showing you velocity.</p>
@@ -125,10 +140,13 @@
     </div>
 
 </body>
-
+<!--jQuery-->
+<!--<script src="http://code.jquery.com/jquery.js"></script>-->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 
 <!--PHYS.JS-->
 <script src="js/animations.js"></script>
+<script src="js/spaceship.js"></script>
 
 <!--Formulas-->
 <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
@@ -138,9 +156,7 @@
 
 <script src="js/bootstrap.min.js"></script>
 
-<!--jQuery-->
-<!--<script src="http://code.jquery.com/jquery.js"></script>-->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+
 
 <!--slider-->
 <script src="js/simple-slider.js"></script>
