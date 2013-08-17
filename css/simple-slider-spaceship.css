@@ -1,9 +1,10 @@
 .slider-spaceship {
-  width: 300px;
+  width: 400px;
+  height: 150px;
 }
 
 .slider-spaceship > .dragger {
-	width: 100px;
+	width: 117px;
 	height: 100px;
 	margin: 0 auto;
     /*border: 1px solid rgba(255,255,255,0.6);*/
@@ -29,10 +30,10 @@
 .slider-spaceship > .track, .slider-spaceship > .highlight-track {
   height: 11px;
 
-  background: #787878;
-  background: -moz-linear-gradient(top, #787878, #a2a2a2);
+  background: #FFFFFF;
+  /*background: -moz-linear-gradient(top, #787878, #a2a2a2);
   background: -webkit-linear-gradient(top, #787878, #a2a2a2);
-  background: linear-gradient(top, #787878, #a2a2a2);
+  background: linear-gradient(top, #787878, #a2a2a2);*/
 
   -moz-box-shadow: inset 0 2px 5px 1px rgba(0,0,0,0.15), 0 1px 0px 0px rgba(230,230,230,0.9), inset 0 0 1px 1px rgba(0,0,0,0.2);
   -webkit-box-shadow: inset 0 2px 5px 1px rgba(0,0,0,0.15), 0 1px 0px 0px rgba(230,230,230,0.9), inset 0 0 1px 1px rgba(0,0,0,0.2);
