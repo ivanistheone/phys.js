@@ -62,12 +62,6 @@
           
           </div>
 
-
-          <div class='containteritem' style="height:100px">            
-            &nbsp;
-          </div>
-           
-           
            
         </div>
     </div>
@@ -145,6 +139,9 @@
         anim3.reset();
         anim3.render();
                 
+        dragUI = new DragUI( anim3 );
+        
+        
         $("#start3").on("click", function() {
             window.anim3.start_animation();
         }); 
