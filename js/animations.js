@@ -2,9 +2,9 @@
 
 var TARGET_POS = 600;
 
-function Rect(options) {
+function Rect(options) { 
 
-options || (options = {})
+options || (options = {})    // this is madness 
 this.width = options.width || 10
 this.height = options.height || 10
 this.x = options.x || 0
