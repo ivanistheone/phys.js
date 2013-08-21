@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Phys.js</title>
+    
+    <link rel="stylesheet" href="css/bootstrap.min.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="css/animations.css" />
+    <link rel="stylesheet" type="text/css" href="css/phy.css" />
+
+    <link href="css/simple-slider.css" rel="stylesheet" type="text/css" />
+    <link href="css/simple-slider-volume.css" rel="stylesheet" type="text/css" />
+    <link href="css/simple-slider-spaceship.css" rel="stylesheet" type="text/css" />
+
+    <link href="css/spaceship.css" rel="stylesheet" type="text/css" />
+
+    <link rel="shortcut icon" type="image/png" href="img/favicon.png" />
+
+</head>
+<body>
+    <div class="container">
+    
+    
+        <div id="navbarExample" class="navbar navbar-static">
+            <div class="navbar-inner">
+                <div class="container" style="width: auto;">
+                    <a class="brand" href="#">Phys.js</a>
+                    <ul class="nav">
+                        <li><a href="#theory">Theory</a></li>
+                        <li><a href="#your-turn">Simulation</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+        <div data-spy="scroll" data-target="#navbarExample" data-offset="0" id="scrollContent">
+
+
+
+            <div class="containeritem">
+            <h4 id="your-turn">Simulation</h4>
+
+            <p>Your spaceship has to reach its destination in ? seconds</p>
+
+            <div class='canvascontainer'>
+               <canvas id="canvas3"></canvas>
+            </div>
+
+
+            <div id="dashboard3">
+                <div class="stats">
+                    <span class="animvalue time">0</span> <span class="units">s</span>
+                </div>
+                <div class="controls">                
+                    <button style="float:right" class="btn" id="reset3">Reset</button>
+                    <button style="float:right" class="btn" id="start3">Start</button>                
+                    Define the velocity: $v=$ <span style="font-weight:bold" class="velocity">50</span> <span class="units">px/sec</span> 
+                    <input type="text" data-slider="true" data-slider-theme="volume" data-slider-step="1" data-slider-range="50,400">     
+                </div>
+           </div>
+          
+          
+          </div>
+
+
+          <div class='containteritem' style="height:100px">            
+            &nbsp;
+          </div>
+           
+           
+           
+        </div>
+    </div>
+
+</body>
+
+
+<!--jQuery and underscore -->
+<script src="js/lib/jquery.js"></script>
+<script src="js/lib/underscore.js"></script>
+
+<!--PHYS.JS-->
+<script src="js/animations.js"></script>
+<script src="js/spaceship.js"></script>
+<script src="js/phys.js"></script>
+
+<!--Formulas-->
+
+<!--  MathJax 2.0 -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    jax: ["input/TeX","output/HTML-CSS"],
+    tex2jax: {
+      inlineMath: [["$","$"],["\\(","\\)"]],
+      displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    TeX: {
+      // extensions: ["AMSmath.js"],             // included below
+      equationNumbers: {  autoNumber: "AMS"  }
+    },
+    displayAlign: "left"
+  });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+<script src="js/bootstrap.min.js"></script>
+
+
+<!--slider-->
+<script src="js/simple-slider.js"></script>
+<script>
+
+      
+    $(function () {
+        // initialization code
+        
+        var anim2, anim3;
+
+
+
+        // your turn
+        $("#dashboard3 [data-slider]")
+          .each(function () {
+              var input = $(this);
+              $("<span>")
+                .addClass("output")
+                .insertAfter($(this));
+          })
+          .bind("slider:ready slider:changed", function (event, data) {
+    
+              $("#dashboard3 .velocity").text(data.value.toFixed(0));
+    
+              //$(this)
+              //  .nextAll(".output:first")
+              //    .html(data.value.toFixed(0));
+          });
+    
+
+        
+        anim3 = new Anim(document.getElementById('canvas3'), {height:200, width:700, dashboard:$("#dashboard3") })    
+        window.anim3 = anim3;        // save for posterity
+        anim3.reset();
+        anim3.render();
+                
+        $("#start3").on("click", function() {
+            window.anim3.start_animation();
+        }); 
+        $("#reset3").on("click", function() {
+            window.anim3.reset();
+        }); 
+
+        
+        
+    });
+
+
+</script>
+
+
+
+</html>
