@@ -1,0 +1,232 @@
+<?xml version="1.0"?>
+<!--
+
+  This file is part of the com.myphysicslab.simlab physics simulation applet.
+  created for http://www.MyPhysicsLab.com
+  Copyright (c) 2005  by Erik Neumann
+
+  This program is free software; you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation; either version 2 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program; if not, write to the Free Software
+  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+  Contact Erik Neumann via http://www.MyPhysicsLab.com
+  or erikn@MyPhysicsLab.com
+
+* ant build script for the myphysicslab project.
+*
+
+* HOW TO BUILD =====================
+* Install ant; make a project directory with this build file and the source
+* code and the etc directory (see DIRECTORY STRUCTURE below); and run ant.
+* To run ant, first cd to the project directory, then execute "ant" at the
+* command line.  This will read this build.xml file and build the default target "all".  
+* To build other targets just list the target you want, for example "ant run_jar".
+* 
+* USAGE ======================
+* The most important parameter is ${name} which can be either
+* Lab (default) or LabTest.
+* To run LabTest instead of Lab, use "ant run_test" or "ant run_test_jar", or change the ${name} property.
+*
+* For example you can say at the command line
+*     ant run_jar -Dname=LabTest
+* which would build the jar file for LabTest and run from it.
+* (The -D defines the 'name' property).
+* Or much more simple:
+*     ant run_jar_test
+* which sets up the 'name' property for you.
+*
+* On the other hand, because ${name} defaults to Lab
+*     ant run_jar
+* would build and run the jar file for Lab.  This is equivalent to
+*     ant run_jar -Dname=Lab
+*
+* The default target is "all", which builds both Lab and LabTest
+* jar files.
+*
+* DIRECTORY STRUCTURE =====================
+* While the directory structure can be modified by changing the names in the "init"
+* target, the expected directory structure is:
+* myphysicslab_project  // the top level directory (can be named whatever you like)
+*   build.xml  // this build file
+*   code
+*     com
+*       myphysicslab
+*         simlab   // put all the .java files here
+*   etc
+*     MANIFEST.MF  // used in creating the jar files
+*   
+* The directories that are created are:
+*   build
+*     classes
+*       com
+*         myphysicslab
+*           simlab
+
+
+-->
+<project name="simlab" default="all" basedir=".">
+  <target name="init">
+    <property name="package" value="com.myphysicslab.simlab"/>
+    <property name="etc.dir" value="etc"/>
+    <property name="doc.api.dir" value="doc/api"/>
+    <property name="src.dir" value="code"/>
+    <property name="build.dir" value="build"/>
+    <property name="classes.dir" value="${build.dir}/classes/"/>
+    <property name="name" value="Lab"/>
+    <!--property name="javadoc" value="/Users/erikn/Documents/ReferenceOutside/j2sdk-1_4_1-doc/doc/api"/> -->
+  </target>
+
+  <!--
+  * Creates the build directories we need.
+  -->
+  <target name="prepare" depends="init">
+    <mkdir dir="${classes.dir}"/>
+    <mkdir dir="${build.dir}"/>
+    <mkdir dir="${doc.api.dir}"/>
+  </target>
+
+  <target name="clean" depends="init">
+    <delete dir="${build.dir}"/>
+    <delete dir="${classes.dir}"/>
+    <delete dir="${doc.api.dir}"/>
+  </target>
+  
+  <!--
+  * Compiles all the .java files that are in {src.dir},
+  * took out:         enableassertions="true"
+  * previously was: target="1.1" and source="1.2"
+	
+  -->
+  <target name="compile" depends="prepare">
+    <javac 
+					 source="1.4"
+           srcdir="${src.dir}"
+           destdir="${classes.dir}"
+           debug="on"
+           deprecation="true">
+      <classpath>
+        <pathelement location="${classes.dir}"/>
+      </classpath>
+    </javac>
+  </target>
+  
+  <!--
+  * Generates the manifest for this jar file.
+  * Copies the generic MANIFEST.MF replacing the tokens for PACKAGE and NAME.
+  * The file MANIFEST.MF consists of one line:
+  *     Main-Class: @PACKAGE@.@NAME@
+  * which when copied with <replacetokens> turns into one of the following
+  *     Main-Class: com.myphysicslab.simlab.Lab
+  * or:
+  *     Main-Class: com.myphysicslab.graphlab.LabTest
+  * The MANIFEST.MF file gets copied to either Lab.MF or LabTest.MF
+  * depending on the ${name} property.
+  -->
+  <target name="manifest" depends="init">
+    <copy file="${etc.dir}/MANIFEST.MF" toFile="${build.dir}/${name}.MF">
+      <filterchain>
+        <replacetokens>
+          <token key="PACKAGE" value="${package}"/>
+          <token key="NAME" value="${name}"/>
+        </replacetokens>
+      </filterchain>
+    </copy>
+  </target>
+
+  <!--
+  * generates the jar file.
+  -->
+  <target name="jar" depends="compile, manifest">
+    <jar  destfile="${build.dir}/${name}.jar"
+          basedir="${classes.dir}"
+          manifest="${build.dir}/${name}.MF"
+          />
+  </target>
+
+  <!-- 
+  * Builds jar file specifically for LabTest.
+  * Defines the ${name} parameter and does <antcall> to make a new ant process
+  * to build that jar file.
+  * 
+  * Note the following warning from Ant: The Definitive Guide Chapter 3.3:
+
+      "[antcall] is something like a subroutine call, and when using it, there's a
+      tendency to start turning build files into programs. That's almost always a
+      mistake, however; if you find yourself using antcall frequently, you're
+      probably not using Ant the way it was intended. There's a tendency to start
+      writing build files as if you were writing programming code with subroutines,
+      but the best way to write build files is to let Ant doing its thing and check
+      the dependencies. If this seems like this is the second time you've heard
+      this, it is because it's that important."
+  
+  * this is what gave me the idea of inventing the 'manifest' target, having a separate
+  * manifest file created for each target (Lab or LabTest).
+  -->
+  <target name="jar_test" depends="compile,manifest">
+    <antcall target="jar">
+      <param name="name" value="LabTest"/>
+    </antcall>
+  </target>
+
+  <!--
+  * Runs the application from the .class files
+  -->
+  <target name="run" depends="compile">
+    <java classname="${package}.${name}" fork="true" failonerror="true">
+      <assertions>
+        <enable/>
+      </assertions>
+      <classpath>
+        <pathelement location="${classes.dir}"/>
+      </classpath>
+    </java>
+    <echo message="Finished running ${name}."/>
+  </target>
+
+  <!--
+  * Runs LabTest from .class files.
+  -->
+  <target name="run_test">
+    <antcall target="run">
+      <param name="name" value="LabTest"/>
+    </antcall>
+  </target>
+
+  <!--
+  * Runs the application out of the jar file
+  -->
+  <target name="run_jar" depends="jar">
+    <java jar="${build.dir}/${name}.jar" fork="true"/>
+    <echo message="Finished running ${name}.jar"/>
+  </target>
+
+  <!--
+  * Runs LabTest from .jar file.
+  -->
+  <target name="run_jar_test" depends="jar_test">
+    <antcall target="run_jar">
+      <param name="name" value="LabTest"/>
+    </antcall>
+  </target>
+
+  <!--
+  * Builds both jar files and docs.
+  -->
+  <target name="all" depends="jar, jar_test"/>
+  
+
+</project>
+
+
+
+
